@@ -105,13 +105,32 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(18px) saturat
 body.menu-open .nav-toggle span:nth-child(1){top:21px;transform:rotate(45deg)}
 body.menu-open .nav-toggle span:nth-child(2){opacity:0}
 body.menu-open .nav-toggle span:nth-child(3){top:21px;transform:rotate(-45deg)}
-.mobile-menu{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);
-  padding:94px var(--pad) 36px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--line);
-  box-shadow:0 30px 60px rgba(12,20,30,.12);transform:translateY(-102%);transition:transform .5s var(--ease);visibility:hidden}
-body.menu-open .mobile-menu{transform:translateY(0);visibility:visible}
-.mobile-menu a{font-family:var(--sans);font-size:26px;font-weight:700;color:var(--ink);padding:14px 0;
-  border-bottom:1px solid var(--line-2);letter-spacing:-.02em}
-.mobile-menu .btn{margin-top:22px;justify-content:center;font-size:15px}
+body.menu-open{overflow:hidden}
+.mobile-menu{position:fixed;inset:0;z-index:999;background:rgba(247,250,252,.98);backdrop-filter:blur(26px) saturate(1.4);
+  padding:108px var(--pad) 44px;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+body.menu-open .mobile-menu{opacity:1;visibility:visible}
+.mobile-menu .m-links{display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
+.mobile-menu .m-link{display:flex;align-items:center;gap:18px;font-family:var(--sans);font-size:clamp(28px,8vw,38px);
+  font-weight:700;letter-spacing:-.02em;color:var(--ink);padding:18px 2px;border-bottom:1px solid var(--line-2);
+  opacity:0;transform:translateY(26px);transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s}
+.mobile-menu .m-link .m-num{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--blue);min-width:26px}
+.mobile-menu .m-link .m-arw{margin-left:auto;color:var(--ink-faint);font-size:22px;transition:transform .35s var(--ease),color .3s}
+.mobile-menu .m-link:active,.mobile-menu .m-link:hover{color:var(--blue)}
+.mobile-menu .m-link:active .m-arw,.mobile-menu .m-link:hover .m-arw{transform:translate(5px,-5px);color:var(--blue)}
+body.menu-open .mobile-menu .m-link{opacity:1;transform:none}
+body.menu-open .mobile-menu .m-link:nth-child(1){transition-delay:.10s}
+body.menu-open .mobile-menu .m-link:nth-child(2){transition-delay:.16s}
+body.menu-open .mobile-menu .m-link:nth-child(3){transition-delay:.22s}
+body.menu-open .mobile-menu .m-link:nth-child(4){transition-delay:.28s}
+body.menu-open .mobile-menu .m-link:nth-child(5){transition-delay:.34s}
+.mobile-menu .m-cta{margin-top:auto;justify-content:center;font-size:16px;
+  opacity:0;transform:translateY(26px);transition:opacity .5s var(--ease) .42s,transform .5s var(--ease) .42s,box-shadow .4s var(--ease)}
+body.menu-open .mobile-menu .m-cta{opacity:1;transform:none}
+.mobile-menu .m-foot{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:12px;
+  letter-spacing:.04em;color:var(--ink-faint);opacity:0;transition:opacity .5s var(--ease) .52s}
+body.menu-open .mobile-menu .m-foot{opacity:1}
+.mobile-menu .m-foot a{color:var(--ink-dim)}
 @media(min-width:1040px){.nav-toggle,.mobile-menu{display:none!important}}
 @media(max-width:1039px){
   nav{display:flex;justify-content:space-between;align-items:center}
@@ -451,12 +470,18 @@ footer{background:var(--dark-2);color:#c3cdd7;border-top:1px solid rgba(255,255,
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#technology">Technology</a>
-  <a href="#industries">Industries</a>
-  <a href="#team">Team</a>
-  <a href="#partners">Partners</a>
-  <a href="#contact">Contact</a>
-  <a href="#contact" class="btn btn-grad">Request a Sample <span class="arw">→</span></a>
+  <div class="m-links">
+    <a class="m-link" href="#technology"><span class="m-num">01</span>Technology<span class="m-arw">↗</span></a>
+    <a class="m-link" href="#industries"><span class="m-num">02</span>Industries<span class="m-arw">↗</span></a>
+    <a class="m-link" href="#team"><span class="m-num">03</span>Team<span class="m-arw">↗</span></a>
+    <a class="m-link" href="#partners"><span class="m-num">04</span>Partners<span class="m-arw">↗</span></a>
+    <a class="m-link" href="#contact"><span class="m-num">05</span>Contact<span class="m-arw">↗</span></a>
+  </div>
+  <a href="#contact" class="btn btn-grad m-cta">Request a Sample <span class="arw">→</span></a>
+  <div class="m-foot">
+    <a href="mailto:info@dashamlabs.com">info@dashamlabs.com</a>
+    <span>Rewari, Haryana · India</span>
+  </div>
 </div>
 
 <!-- HERO -->
