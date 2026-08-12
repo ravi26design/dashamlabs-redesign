@@ -94,6 +94,33 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(18px) saturat
 .nav-cta{font-family:var(--sans);font-weight:600;font-size:13px;padding:12px 22px;border-radius:100px;
   background:var(--ink);color:#fff;transition:all .4s var(--ease);white-space:nowrap}
 .nav-cta:hover{background:var(--grad);color:#06121a;box-shadow:0 10px 26px rgba(47,123,255,.28)}
+/* mobile nav toggle + menu */
+.nav-toggle{display:none;justify-self:end;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(255,255,255,.7);backdrop-filter:blur(8px);cursor:pointer;position:relative;padding:0}
+.nav-toggle span{position:absolute;left:12px;right:12px;height:2px;background:var(--ink);border-radius:2px;
+  transition:transform .35s var(--ease),opacity .25s,top .35s var(--ease)}
+.nav-toggle span:nth-child(1){top:15px}.nav-toggle span:nth-child(2){top:21px}.nav-toggle span:nth-child(3){top:27px}
+body.menu-open .nav-toggle span:nth-child(1){top:21px;transform:rotate(45deg)}
+body.menu-open .nav-toggle span:nth-child(2){opacity:0}
+body.menu-open .nav-toggle span:nth-child(3){top:21px;transform:rotate(-45deg)}
+.mobile-menu{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);
+  padding:94px var(--pad) 36px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--line);
+  box-shadow:0 30px 60px rgba(12,20,30,.12);transform:translateY(-102%);transition:transform .5s var(--ease);visibility:hidden}
+body.menu-open .mobile-menu{transform:translateY(0);visibility:visible}
+.mobile-menu a{font-family:var(--sans);font-size:26px;font-weight:700;color:var(--ink);padding:14px 0;
+  border-bottom:1px solid var(--line-2);letter-spacing:-.02em}
+.mobile-menu .btn{margin-top:22px;justify-content:center;font-size:15px}
+@media(min-width:1040px){.nav-toggle,.mobile-menu{display:none!important}}
+@media(max-width:1039px){.nav-toggle{display:block}.nav-right .nav-cta{display:none}}
+/* small-screen hero + spacing */
+@media(max-width:640px){
+  .hero{padding-top:118px;padding-bottom:54px;min-height:auto}
+  .hero-seal{width:74px;height:74px;left:12px;top:-16px}
+  .scroll-cue{display:none}
+  .hero h1{font-size:clamp(34px,9.5vw,52px)}
+  .hero-metrics{gap:18px 22px}
+  .head{margin-bottom:38px}
+}
 
 /* ---------- HERO ---------- */
 .hero{position:relative;overflow:hidden;min-height:100vh;
@@ -412,8 +439,17 @@ footer{background:var(--dark-2);color:#c3cdd7;border-top:1px solid rgba(255,255,
   </div>
   <div class="nav-right">
     <a href="#contact" class="nav-cta">Request Sample</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#technology">Technology</a>
+  <a href="#industries">Industries</a>
+  <a href="#team">Team</a>
+  <a href="#partners">Partners</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="btn btn-grad">Request a Sample <span class="arw">→</span></a>
+</div>
 
 <!-- HERO -->
 <header class="hero" id="top">
@@ -707,6 +743,15 @@ footer{background:var(--dark-2);color:#c3cdd7;border-top:1px solid rgba(255,255,
 <script>
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+
+/* Mobile menu */
+const navToggle=document.getElementById('navToggle'), mobileMenu=document.getElementById('mobileMenu');
+if(navToggle){
+  const setOpen=(o)=>{document.body.classList.toggle('menu-open',o);navToggle.setAttribute('aria-expanded',o)};
+  navToggle.addEventListener('click',()=>setOpen(!document.body.classList.contains('menu-open')));
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+}
 
 if('IntersectionObserver'in window){
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},
