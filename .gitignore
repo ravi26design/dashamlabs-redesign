@@ -1,0 +1,6 @@
+.DS_Store
+live.html
+serve.py
+.claude/
+*.bak
+nohup.out
