@@ -95,8 +95,10 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(18px) saturat
   background:var(--ink);color:#fff;transition:all .4s var(--ease);white-space:nowrap}
 .nav-cta:hover{background:var(--grad);color:#06121a;box-shadow:0 10px 26px rgba(47,123,255,.28)}
 /* mobile nav toggle + menu */
-.nav-toggle{display:none;justify-self:end;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;
-  background:rgba(255,255,255,.7);backdrop-filter:blur(8px);cursor:pointer;position:relative;padding:0}
+.nav-toggle{display:none;justify-self:end;width:46px;height:46px;border:1px solid var(--line);border-radius:13px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(12,20,30,.07);
+  cursor:pointer;position:relative;padding:0;transition:box-shadow .3s,transform .3s var(--ease)}
+.nav-toggle:active{transform:scale(.94)}
 .nav-toggle span{position:absolute;left:12px;right:12px;height:2px;background:var(--ink);border-radius:2px;
   transition:transform .35s var(--ease),opacity .25s,top .35s var(--ease)}
 .nav-toggle span:nth-child(1){top:15px}.nav-toggle span:nth-child(2){top:21px}.nav-toggle span:nth-child(3){top:27px}
@@ -111,7 +113,13 @@ body.menu-open .mobile-menu{transform:translateY(0);visibility:visible}
   border-bottom:1px solid var(--line-2);letter-spacing:-.02em}
 .mobile-menu .btn{margin-top:22px;justify-content:center;font-size:15px}
 @media(min-width:1040px){.nav-toggle,.mobile-menu{display:none!important}}
-@media(max-width:1039px){.nav-toggle{display:block}.nav-right .nav-cta{display:none}}
+@media(max-width:1039px){
+  nav{display:flex;justify-content:space-between;align-items:center}
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav-right{gap:0}
+  .nav-right .nav-cta{display:none}
+}
 /* small-screen hero + spacing */
 @media(max-width:640px){
   .hero{padding-top:118px;padding-bottom:54px;min-height:auto}
